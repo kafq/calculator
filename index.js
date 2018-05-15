@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-verifyExpression = (req, res, next) => {  
+_verifyExpression = (req, res, next) => {  
     const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
     const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '');
    
@@ -28,7 +28,7 @@ verifyExpression = (req, res, next) => {
     }
 }
 
-app.get('/calculus', verifyExpression, (req, res) => {
+app.get('/calculus', _verifyExpression, (req, res) => {
     const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
     const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, ''); 
     res.send({
@@ -50,7 +50,7 @@ app.get('/error/:errorcode', (req, res) => {
     }
 })
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
