@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   evaluateExpression = async (expression) => {
-    const response = await fetch(`/api/calculus?query=${expression}`)
+    const response = await fetch(`/calculus?query=${expression}`)
     const body = await response.json();
     if (response.status !== 200 ) throw Error(body.message);
     return body;
