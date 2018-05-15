@@ -7,7 +7,7 @@ The project is a simple calculator, built as a web service with an API endpoint 
 Original | Role | Encoded
 --- | --- | ---
 2 * (23/(33))- 23 * (23) | Regular case with whitespaces | [MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp](https://guarded-wildwood-31902.herokuapp.com/calculus?query=MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp)
-5-----3 | standard eval() dies here | [NS0tLS0tMw==](https://guarded-wildwood-31902.herokuapp.com/NS0tLS0tMw==)
+5-----3 | standard eval() dies here | [NS0tLS0tMw==](https://guarded-wildwood-31902.herokuapp.com/calculus?query=NS0tLS0tMw==)
 2 + 4*3/0/1 | standard eval() does nothing here, needs to be at least null | [MiArIDQqMy8wLzE=](https://guarded-wildwood-31902.herokuapp.com/calculus?query=MiArIDQqMy8wLzE=)
 2/2.5+2*2.5 | Float numbers | [Mi8yLjUrMioyLjU=](https://guarded-wildwood-31902.herokuapp.com/calculus?query=Mi8yLjUrMioyLjU=)
 Apple | Invalid input | [QXBwbGU=](https://guarded-wildwood-31902.herokuapp.com/calculus?query=QXBwbGU=)
