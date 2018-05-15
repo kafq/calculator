@@ -8,6 +8,8 @@ Currently available at: https://guarded-wildwood-31902.herokuapp.com
 
 While the original approach was to use `eval()` strengthened by string cleanup, it appeared to be too slow and could not handle expressions with several minus signs, e.g. `5 - - - 3` or a basic `4/0`. As the result, I have switched to Math JS.
 
+Third column contains links to endpoint, while they work nice in Safari, they continue to point to the GUI in Chrome unless cache is cleared. So, it is eathier to open those from Safari.
+
 Original | Role | Encoded
 --- | --- | ---
 2 * (23/(33))- 23 * (23) | Regular case with whitespaces | [MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp](https://guarded-wildwood-31902.herokuapp.com/calculus?query=MiAqICgyMy8oMzMpKS0gMjMgKiAoMjMp)
