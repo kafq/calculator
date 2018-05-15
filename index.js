@@ -28,10 +28,11 @@ verifyExpression = (req, res, next) => {
 }
 
 app.get('/calculus', verifyExpression, (req, res) => {
-        const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
+        let decodedExpression = Buffer.from(req.query.query, 'base64').toString();
+        let cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '')
         res.send({
             error: false,
-            result : eval(decodedExpression)})
+            result : eval(cleanedUpExpression)})
 })
 
 app.get('/error/:errorcode', (req, res) => {
