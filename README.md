@@ -1,8 +1,12 @@
 # Calculator Web Service
 
-The project is a simple calculator, built as a web service with an API endpoint and BASE64 encoding. Use tools are React in terms of real-world implementability and Express JS. There is also a GUI implemented, which validates user input and handles errors. However, the endpoint itself is also capable of error handling. 
+The project is a simple calculator, built as a web service with an API endpoint and BASE64 encoding. Used tools are React in terms of real-world implementability and frontend and Express JS used as a proxy. There is also a GUI implemented, which validates user input and handles errors. The endpoint itself is also capable of error handling, too.
+
+Currently available at: https://guarded-wildwood-31902.herokuapp.com
 
 ## Handled use cases
+
+While the original approach was to use `eval()` strengthened by string cleanup, it appeared to be too slow and could not handle expressions with several minus signs, e.g. `5 - - - 3` or a basic `4/0`. As the result, I have switched to Math JS.
 
 Original | Role | Encoded
 --- | --- | ---
@@ -15,3 +19,12 @@ Apple | Invalid input | [QXBwbGU=](https://guarded-wildwood-31902.herokuapp.com/
 console.log('Hack world') | Code injections | [Y29uc29sZS5sb2coJ0hhY2sgd29ybGQnKQ==](https://guarded-wildwood-31902.herokuapp.com/calculus?query=Y29uc29sZS5sb2coJ0hhY2sgd29ybGQnKQ==)
 
 
+## Installation
+
+As a Heroku App with Express JS used as proxy it is available at https://guarded-wildwood-31902.herokuapp.com. However, it can be lauched locally by cloning the repo and running
+
+```javascript
+yarn && yarn dev
+```
+
+The script uses concurrently to run both client and server scripts. Client side will be available at `localhost:3000` and API endpoint is at `localhost:5000`
