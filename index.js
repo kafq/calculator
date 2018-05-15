@@ -7,9 +7,10 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 verifyExpression = (req, res, next) => {
     
-    const decodedExpression = Buffer.from(req.query.query, 'base64').toString();  
+    const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
+    const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '');
     try {
-        if (eval(decodedExpression)) {
+        if (eval(cleanedUpExpression)) {
             next()
         }
     } catch(e) {
@@ -28,11 +29,10 @@ verifyExpression = (req, res, next) => {
 }
 
 app.get('/calculus', verifyExpression, (req, res) => {
-        let decodedExpression = Buffer.from(req.query.query, 'base64').toString();
-        let cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '')
-        res.send({
-            error: false,
-            result : eval(cleanedUpExpression)})
+    const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
+    res.send({
+        error: false,
+        result : eval(decodedExpression)})
 })
 
 app.get('/error/:errorcode', (req, res) => {
