@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 verifyExpression = (req, res, next) => {
     
     const decodedExpression = Buffer.from(req.query.query, 'base64').toString();  
@@ -45,5 +47,9 @@ app.get('/error/:errorcode', (req, res) => {
             break;
     }
 })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 app.listen(port, () => console.log(`Running on port ${port}`));
