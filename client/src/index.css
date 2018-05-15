@@ -4,6 +4,8 @@ body {
   font-family: sans-serif;
   background: #111111;
   text-rendering: geometricPrecision;
+}
+*, *:before, *:after {
   box-sizing: border-box;
 }
 h1, h2, h3, h4 {
@@ -27,4 +29,5 @@ h2 {
   font-size: 1.5rem;
   font-weight: 400;
   color: #fff;
+  line-height: 1.2;
 }

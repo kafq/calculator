@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import './App.css';
+import githubIcon from './images/github-icon.png';
 
 class App extends Component {
   constructor(props) {
@@ -40,8 +40,7 @@ class App extends Component {
   }
 
   handleExpressionChange = (e) => {
-    const value = e.target.value;
-    
+
     /* Disable input of letters */
     if (/[^0-9+\-*/().]/.test(e.target.value)) {
       e.preventDefault()
@@ -49,16 +48,20 @@ class App extends Component {
     else {
       this.setState({expression: e.target.value})      
     }
-    
+
   }
 
   render() {
     return (
       <div className="Container">
 
+        <div className="Nav-Section">
+          <a href="https://github.com/kafq/calculator"><img src={githubIcon} className="Nav-Icon" alt=""/></a>
+        </div>
+
         <div className="Header-Section">
-        <h1>Hi there, I’m a  <br/> calculator.</h1>
-        <h2>Enter an expression and I will evaluate it*</h2>
+          <h1>Hi there, I’m a  <br/> calculator<span className="Highlight-Text">.</span></h1>
+          <h2>Enter an expression and I will evaluate it</h2>
         </div>
 
         <div className="Calc-Section">
@@ -66,28 +69,26 @@ class App extends Component {
             <span className="Label">Expression</span>          
           </div>
           <form onSubmit={this.submitExpression}>      
-          <input
-            type="text"
-            className={"Floating-Input " + (this.state.errorMessage ? 'Floating-Input-Error' : '')}
-            onChange={this.handleExpressionChange}
-            value={this.state.expression}/>
-          <p className="Error-Message">{this.state.errorMessage}</p>          
-            
+            <input
+              type="text"
+              className={"Floating-Input " + (this.state.errorMessage ? 'Floating-Input-Error' : '')}
+              onChange={this.handleExpressionChange}
+              value={this.state.expression}/>
+            <p className="Error-Message">{this.state.errorMessage}</p>          
           </form>
         </div>
         
+        {/* Do not show the result section, if there is no result */}
+
         {this.state.expressionResult ? (
           <div className="Calc-Section">
             <div className="Label-Cont">
               <span className="Label">Result</span>
             </div>
-            <span className="Display-1">{this.state.expressionResult}</span>
+            <span className="Display-1">{this.state.expressionResult.toFixed(3)}</span>
           </div>
         ) : null}
-        
-        <div className="Footer-Section">
-        <span className="Label">* — using an API endpoint and BASE64 encoding, of course</span>      
-        </div>
+
       </div>
     );
   }

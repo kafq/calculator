@@ -29,17 +29,12 @@ verifyExpression = (req, res, next) => {
 
 app.get('/calculus', verifyExpression, (req, res) => {
         const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
-        console.log('Hei')
         res.send({
-            error: false,
-            result : eval(decodedExpression)})
-        res.json({
             error: false,
             result : eval(decodedExpression)})
 })
 
 app.get('/error/:errorcode', (req, res) => {
-    console.log('Accessed error code');
     switch(req.params.errorcode) {
         case 'not-expression':
             res.send({error: true, message: 'Passed input is not an expression'})

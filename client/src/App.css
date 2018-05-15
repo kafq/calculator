@@ -1,35 +1,64 @@
+/* General layout elements */
+
 .Container {
   display: flex;
   flex-direction: column;
   max-width: 1080px;
   width: 100%;
-  margin: 0 auto;
   height: 100vh;
+  margin: 0 auto;
 }
-.Label {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: #fff;
-  opacity: 0.5;
+
+.Row {
+  display: flex;
+  flex-direction: row;
+  height: 6rem;
 }
-.Label-Cont {
-  width: 100%;
-  height: 2rem;
+
+.Nav-Section {
+  position: fixed;
+  top: 1rem;
 }
+.Header-Section {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
+.Calc-Section {
+  margin-bottom: 2rem;
+}
+
+/* Typography */
+
 .Display-1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
   font-weight: 700;
   color: #fff;
   line-height: 1;
-  min-height: 3rem;
+}
+.Label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.6;
+  opacity: 0.5;
+}
+.Highlight-Text {
+  color: #1327D7
+}
+
+/* Form elements */
+
+.Label-Cont {
+  width: 100%;
+  height: 2rem;
 }
 
 .Floating-Input {
   border: none;
   width: 100%;
-  max-height: 3rem;
   font-size: 3rem;
   font-weight: 700;
   line-height: 1;
@@ -46,35 +75,44 @@
 }
 
 .Floating-Input-Error {
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid #E30606;
 }
 .Floating-Input-Error:focus {
-  border-bottom: 5px solid red;
+  border-bottom: 5px solid #E30606;
   transition: 0.3s ease-in-out;
 }
 .Error-Message {
   font-size: 1rem;
-  color: red;
+  color: #E30606;
 }
-.Row {
-  display: flex;
-  flex-direction: row;
-  height: 6rem;
+
+.Nav-Icon {
+  width: 32px;
+  height: 32px;
 }
-.Header-Section {
-  margin-top: 6rem;
-  margin-bottom: 6rem;
+
+@media screen and (max-width: 1120px) {
+  .Container {
+    max-width: 720px;
+  }
 }
-.Calc-Section {
-  margin-bottom: 2rem;
-}
-.Footer-Section {
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 3rem;
-  justify-content: end;
-}
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+
+@media screen and (max-width: 760px) {
+  .Container {
+    max-width: 100%;
+    padding: 0 2rem;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+  .Floating-Input {
+    font-size: 1.5rem;
+  }
+  .Display-1 {
+    font-size: 1.5rem;
+  }
 }
