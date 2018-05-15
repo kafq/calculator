@@ -42,7 +42,7 @@ class App extends Component {
   handleExpressionChange = (e) => {
 
     /* Disable input of letters */
-    if (/[^0-9+\-*/().]/.test(e.target.value)) {
+    if (/[^0-9+\-*/(). ]/.test(e.target.value)) {
       e.preventDefault()
     }
     else {
@@ -85,7 +85,7 @@ class App extends Component {
             <div className="Label-Cont">
               <span className="Label">Result</span>
             </div>
-            <span className="Display-1">{this.state.expressionResult.toFixed(3)}</span>
+            <span className="Display-1">{Math.round(this.state.expressionResult * 100)/100}</span>
           </div>
         ) : null}
 

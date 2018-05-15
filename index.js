@@ -30,7 +30,7 @@ verifyExpression = (req, res, next) => {
 
 app.get('/calculus', verifyExpression, (req, res) => {
     const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
-    const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '');    
+    const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, ''); 
     res.send({
         error: false,
         result : math.eval(cleanedUpExpression)})
