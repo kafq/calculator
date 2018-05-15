@@ -39,6 +39,7 @@ app.get('/calculus', verifyExpression, (req, res) => {
 })
 
 app.get('/error/:errorcode', (req, res) => {
+    console.log('Accessed error code');
     switch(req.params.errorcode) {
         case 'not-expression':
             res.send({error: true, message: 'Passed input is not an expression'})
