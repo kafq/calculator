@@ -28,7 +28,7 @@ _verifyExpression = (req, res, next) => {
     }
 }
 
-app.get('/calculus', _verifyExpression, (req, res) => {
+app.get('/api/calculus', _verifyExpression, (req, res) => {
     const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
     const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, ''); 
     res.send({
@@ -36,7 +36,7 @@ app.get('/calculus', _verifyExpression, (req, res) => {
         result : math.eval(cleanedUpExpression)})
 })
 
-app.get('/error/:errorcode', (req, res) => {
+app.get('/api/error/:errorcode', (req, res) => {
     switch(req.params.errorcode) {
         case 'not-expression':
             res.send({error: true, message: 'Passed input is not an expression'})
