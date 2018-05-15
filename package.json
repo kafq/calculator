@@ -2,8 +2,9 @@
     "name": "calculator",
     "version": "1.0.0",
     "scripts": {
+        "start": "node index.js",
         "client": "cd client && yarn start",
-        "server": "nodemon server.js",
+        "server": "nodemon index.js",
         "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
         "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
     },
