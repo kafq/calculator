@@ -3,10 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "start": "node index.js",
-        "client": "cd client && yarn start",
-        "server": "node index.js",
         "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
-        "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
     },
     "dependencies": {
         "express": "^4.16.2",
