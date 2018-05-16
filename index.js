@@ -1,10 +1,11 @@
 const express = require('express');
 const path = require('path');
 const math = require('mathjs')
+
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use('/', express.static(`${__dirname}/client/build`));
 
 _verifyExpression = (req, res, next) => {  
     const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
@@ -51,8 +52,7 @@ app.get('/error/:errorcode', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-    console.log('Not recognized')
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 });
 
 app.listen(port, () => console.log(`Running on port ${port}`));
