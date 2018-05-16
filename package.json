@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "scripts": {
         "start": "node index.js",
-        "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
+        "heroku-postbuild": "cd client && yarn --production=false && yarn run build"
     },
     "dependencies": {
         "express": "^4.16.2",
