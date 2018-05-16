@@ -10,23 +10,24 @@ app.use('/', express.static(`${__dirname}/client/build`));
 
 _verifyExpression = (req, res, next) => {
     try {
-        /* When a word passed, Math JS returns null, so redirect to error page */
+        /* When a word passed, Math JS returns null, so throw an error */
         const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
         const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '');
-        math.eval(cleanedUpExpression) ? next() : res.redirect('/error/' + 'default')
+        math.eval(cleanedUpExpression) ? next() : res.send({error: true, message: 'Expression is not valid'});
+        
     } catch(e) {
         switch(true) {
             case /The first argument must be one of type string/.test(e.message):
                 res.send('Hi, try to add some expressions in a form of BASE-64 encoding to /calculus?query=[expression]')
                 break;
             case /Undefined symbol/.test(e.message):
-                res.redirect('/error/' + 'not-expression')
+                res.send({error: true, message: 'Passed input is not an expression'})
                 break;
             case /Invalid or unexpected token/.test(e.message):
-                res.redirect('/error/' + 'invalid-char')             
+                res.send({error: true, message: 'Passed input contains invalid characters'})             
                 break;
             default:
-                res.redirect('/error/' + 'default');
+                res.send({error: true, message: 'Expression is not valid'});
                 break;
         }
     }
@@ -38,20 +39,6 @@ app.get('/calculus', _verifyExpression, (req, res) => {
     res.send({
         error: false,
         result : math.eval(cleanedUpExpression)})
-})
-
-app.get('/error/:errorcode', (req, res) => {
-    switch(req.params.errorcode) {
-        case 'not-expression':
-            res.send({error: true, message: 'Passed input is not an expression'})
-            break;
-        case 'invalid-char':
-            res.send({error: true, message: 'Passed input contains invalid characters'})
-            break;
-        default:
-            res.send({error: true, message: 'Expression is not valid'})
-            break;
-    }
 })
 
 app.get('*', (req, res) => {

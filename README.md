@@ -1,14 +1,14 @@
 # Calculator Web Service
 
-The project is a simple calculator, built as a web service with an API endpoint and BASE64 encoding. Used tools are React in terms of real-world implementability and frontend and Express JS used as a proxy. There is also a GUI implemented, which validates user input and handles errors. The endpoint itself is also capable of error handling, too.
+The project is a simple calculator, built as a web service with an API endpoint and BASE64 encoding. Used tools are React in terms of real-world applicability and frontend and Express JS backend used as a proxy. There is also a GUI implemented, which validates user input and handles errors. The endpoint itself is also capable of error handling, too.
 
 Currently available at: https://guarded-wildwood-31902.herokuapp.com
+The endpoint is located at: https://guarded-wildwood-31902.herokuapp.com/calculus
+
 
 ## Handled use cases
 
-While the original approach was to use `eval()` strengthened by string cleanup, it appeared to be too slow and could not handle expressions with several minus signs, e.g. `5 - - - 3` or a basic `4/0`. As the result, I have switched to Math JS.
-
-Third column contains links to endpoint, while they work nice in Safari, they continue to point to the GUI in Chrome unless cache is cleared. So, it is eathier to open those from Safari.
+While the original approach was to use `eval()` strengthened by string cleanup, it appeared to be too slow and could not handle expressions with several minus signs, e.g. `5 - - - 3` or a basic `4/0`. As the result, I have switched to Math JS. Third column contains links to the endpoint.
 
 Original | Role | Encoded
 --- | --- | ---
