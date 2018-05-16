@@ -29,4 +29,9 @@ As a Heroku App with Express JS used as proxy it is available at https://guarded
 yarn && yarn dev
 ```
 
-The script uses concurrently to run both client and server scripts. Client side will be available at `localhost:3000` and API endpoint is at `localhost:5000`
+The script uses `concurrently` to run both client and server scripts. Client side will be available at `localhost:3000` and API endpoint is at `localhost:5000`
+
+## Challanges
+
+1. Making Heroku work correctly with Express backend as a proxy
+2. Finding an alternative to `eval()`

@@ -7,15 +7,18 @@ const port = process.env.PORT || 5000;
 
 app.use('/', express.static(`${__dirname}/client/build`));
 
-_verifyExpression = (req, res, next) => {  
-    const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
-    const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '');
-   
+
+_verifyExpression = (req, res, next) => {
     try {
         /* When a word passed, Math JS returns null, so redirect to error page */
+        const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
+        const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '');
         math.eval(cleanedUpExpression) ? next() : res.redirect('/error/' + 'default')
     } catch(e) {
         switch(true) {
+            case /The first argument must be one of type string/.test(e.message):
+                res.send('Hi, try to add some expressions in a form of BASE-64 encoding to /calculus?query=[expression]')
+                break;
             case /Undefined symbol/.test(e.message):
                 res.redirect('/error/' + 'not-expression')
                 break;

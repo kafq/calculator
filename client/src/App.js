@@ -15,11 +15,10 @@ class App extends Component {
   
   submitExpression = (e) => {
     e.preventDefault();
-    this.setState({errorMessage: ''})
-    
+    this.setState({errorMessage: ''});
+
     /* Remove non-Latin and other invalid characters, if they were pasted via clipboard */
     const encodedExpression = btoa(this.state.expression.replace(/[^0-9+\-*/().]/g, ''))
-    
     this.evaluateExpression(encodedExpression).then(res => {
       if (!res.error) {
         this.setState({ expressionResult: res.result})
@@ -41,7 +40,7 @@ class App extends Component {
 
   handleExpressionChange = (e) => {
 
-    /* Disable input of letters */
+    /* Disable input of letters, if the input CONTAINS invalid characters */
     if (/[^0-9+\-*/(). ]/.test(e.target.value)) {
       e.preventDefault()
     }
