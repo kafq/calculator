@@ -13,8 +13,8 @@ _verifyExpression = (req, res, next) => {
         /* When a word passed, Math JS returns null, so throw an error */
         const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
         const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '');
-        math.eval(cleanedUpExpression) ? next() : res.send({error: true, message: 'Expression is not valid'});
-        
+        res.locals.expressionResult = math.eval(cleanedUpExpression);  
+        next();
     } catch(e) {
         switch(true) {
             case /The first argument must be one of type string/.test(e.message):
@@ -34,11 +34,9 @@ _verifyExpression = (req, res, next) => {
 }
 
 app.get('/calculus', _verifyExpression, (req, res) => {
-    const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
-    const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, ''); 
     res.send({
         error: false,
-        result : math.eval(cleanedUpExpression)})
+        result : res.locals.expressionResult})
 })
 
 app.get('*', (req, res) => {
