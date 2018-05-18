@@ -13,8 +13,15 @@ _verifyExpression = (req, res, next) => {
         /* When a word passed, Math JS returns null, so throw an error */
         const decodedExpression = Buffer.from(req.query.query, 'base64').toString();
         const cleanedUpExpression = decodedExpression.replace(/[^0-9+\-*/().]/g, '');
-        res.locals.expressionResult = math.eval(cleanedUpExpression);  
-        next();
+
+        /* Both 2 + 2 and 2 + 2HELLO are evaluated as 4, but the second one is not valid, thus, should be handled as en error*/
+        if (decodedExpression.length > cleanedUpExpression.length) {
+            res.send({error: true, message: 'Expression contained invalid characters'});            
+        }
+        else {
+            res.locals.expressionResult = math.eval(cleanedUpExpression);  
+            next();
+        }
     } catch(e) {
         switch(true) {
             case /The first argument must be one of type string/.test(e.message):
